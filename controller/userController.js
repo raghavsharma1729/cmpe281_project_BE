@@ -17,7 +17,7 @@ const create = async (
         password,
         identification
     } = request.body;
-    const user = { firstName, lastName, gender, dateOfBirth, contactNo, email, password, identification };
+    const user = { firstName, lastName, gender, dateOfBirth: new Date(dateOfBirth), contactNo, email, password, identification };
     const createdUser = await userService.create(user);
     response.status(http.StatusCode.CREATED).json(createdUser);
 };
