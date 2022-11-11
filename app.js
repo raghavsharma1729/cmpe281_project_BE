@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { registerPerson, userLogin } from './controller/index.js';
+import userController from './controller/userController.js';
 import * as dotenv from 'dotenv';
 import {
     handleLogs,
@@ -14,6 +14,8 @@ import {
 dotenv.config()
 
 const app = express();
+
+//middleware
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
@@ -21,9 +23,8 @@ app.use(handleLogs);
 app.use(handleDbConnection);
 
 
-app.post("/signup", registerPerson);
+app.post("/signup", userController.create);
 
-app.post("/login", userLogin);
 
 app.use(handleRoutes);
 app.use(handleErrors);

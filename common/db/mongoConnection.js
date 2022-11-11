@@ -1,4 +1,7 @@
-import { connect, connection } from 'mongoose';
+import pkg from 'mongoose';
+const { connect, connection } = pkg;
+import logger from '../utils/logger';
+
 
 
 const connectMongo = async () => {
@@ -9,7 +12,7 @@ const connectMongo = async () => {
     });
 
     connection.once('error', (error) => {
-        logger.info('Mongo DcB connection error', error);
+        logger.info('Mongo DB connection error', error);
     });
 
     connection.once('open', () => {
@@ -23,8 +26,6 @@ const connectMongo = async () => {
     await connect(dbUri, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: true,
         serverSelectionTimeoutMS: 120000,
         socketTimeoutMS: 360000,
         connectTimeoutMS: 300000
