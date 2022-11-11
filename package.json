@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "PROJECT1_BE",
+  "name": "PROJECT_BE",
   "version": "1.0.0",
   "description": "backend to save files on cloud ",
   "main": "app.js",
@@ -16,7 +16,9 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.7.2",
     "nodemon": "^2.0.20",
-    "pg": "^8.8.0"
+    "winston": "^3.8.2"
   }
 }
