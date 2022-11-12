@@ -10,6 +10,7 @@ import {
     handleDbConnection,
     handleRoutes
 } from './middleware';
+import handleAuthentication from './middleware/handleAuthentication.js';
 
 
 dotenv.config()
@@ -26,7 +27,9 @@ app.use(handleDbConnection);
 //routes
 app.post("/signup", userController.create);
 app.post("/login", userController.login);
-app.post("/trips", tripController.trips);
+
+//secured routes
+app.post("/trips", handleAuthentication, tripController.trips);
 
 app.use(handleRoutes);
 app.use(handleErrors);
