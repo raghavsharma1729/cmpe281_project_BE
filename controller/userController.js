@@ -27,10 +27,17 @@ const login = async (request, response) => {
     response.status(http.StatusCode.OK).json(token);
 };
 
+const fetchProfile = async (request, response) => {
+    const user = request.body.user;
+    const userProfile = await userService.fetchProfile(user)
+    response.status(http.StatusCode.OK).json(userProfile);
+};
+
 
 const userController = wrapAsync({
     create,
-    login
+    login,
+    fetchProfile
 });
 
 export default userController;

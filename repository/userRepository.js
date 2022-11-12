@@ -21,6 +21,11 @@ const findUserByEmailAndPassword = async (email, password) => {
     return result && convertUserDocumentToObject(result);
 };
 
-const userRepository = { create, findUserByEmailAndPassword };
+const findUserById = async (id) => {
+    const result = await UserModel.findOne({ id });
+    return result && convertUserDocumentToObject(result);
+};
+
+const userRepository = { create, findUserByEmailAndPassword, findUserById };
 
 export default userRepository;
