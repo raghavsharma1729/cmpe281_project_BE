@@ -16,6 +16,11 @@ const create = async (user) => {
     return result && convertUserDocumentToObject(result);
 };
 
-const userRepository = { create };
+const findUserByEmailAndPassword = async (email, password) => {
+    const result = await UserModel.findOne({ email, password });
+    return result && convertUserDocumentToObject(result);
+};
+
+const userRepository = { create, findUserByEmailAndPassword };
 
 export default userRepository;

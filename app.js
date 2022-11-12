@@ -22,8 +22,9 @@ app.use(express.json());
 app.use(handleLogs);
 app.use(handleDbConnection);
 
-
+//routes
 app.post("/signup", userController.create);
+app.post("/login", userController.login);
 
 
 app.use(handleRoutes);

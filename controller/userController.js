@@ -22,8 +22,16 @@ const create = async (
     response.status(http.StatusCode.CREATED).json(createdUser);
 };
 
+const login = async (request, response) => {
+    const { email, password } = request.body;
+    const token = await userService.login(email, password);
+    response.status(http.StatusCode.OK).json(token);
+};
+
+
 const userController = wrapAsync({
-    create
+    create,
+    login
 });
 
 export default userController;
