@@ -1,23 +1,32 @@
 import http from "../common/enums/http";
 import { wrapAsync } from "../common/utils/error/wrapAsync";
-import logger from "../common/utils/logger";
 import tripService from "../services/tripService";
-
-
+import { ObjectId } from 'mongodb';
 
 
 const trips = async (request, response) => {
     const {
         title,
-        destination,
-        fromdate,
-        todate,
+        destinations,
+        fromDate,
+        toDate,
         cost,
-        image,
-        tripdetail,
-        useremail
+        images,
+        members,
+        tripDetails,
+        user
     } = request.body;
-    const trip = { title, destination, fromdate: new Date(fromdate), todate: new Date(todate), cost, useremail, tripdetail, image };
+    const trip = {
+        title,
+        destinations,
+        fromDate: new Date(fromDate),
+        toDate: new Date(toDate),
+        cost,
+        images,
+        members,
+        tripDetails,
+        userId: user?.id || new ObjectId()
+    };
     const createTrip = await tripService.create(trip);
     response.status(http.StatusCode.CREATED).json(createTrip);
 };

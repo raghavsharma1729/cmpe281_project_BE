@@ -1,6 +1,6 @@
 import { TripModel } from "./model/trip";
 
-const convertUserDocumentToObject = (document) =>
+const convertTripDocumentToObject = (document) =>
     document.toObject({
         getters: true,
         versionKey: false,
@@ -13,7 +13,7 @@ const convertUserDocumentToObject = (document) =>
 
 const create = async (trip) => {
     const result = await TripModel.create(trip);
-    return result && convertUserDocumentToObject(result);
+    return result && convertTripDocumentToObject(result);
 };
 
 

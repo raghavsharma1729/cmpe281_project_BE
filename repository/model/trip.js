@@ -1,40 +1,74 @@
 import mongoose, { Schema } from 'mongoose';
+import { ObjectId } from 'mongodb';
 
-export const collectionName = 'trip';
+export const collectionName = 'trips';
+
+const DayDetail = new Schema(
+    {
+        day: {
+            type: Number
+        },
+        detail: {
+            type: String
+        }
+    },
+    {
+        _id: false,
+        versionKey: false
+    }
+);
+
+const ImagesDetail = new Schema(
+    {
+        tag: {
+            type: String
+        },
+        url: {
+            type: String
+        },
+        caption: {
+            type: String
+        }
+    },
+    {
+        _id: false,
+        versionKey: false
+    }
+);
 
 const TripSchema = new Schema(
     {
-        triptitle: {
+        title: {
             type: String,
             required: true,
         },
-        destination: {
-            type: Array, // List of Strings
+        destinations: {
+            type: [String],
             required: true
         },
-        fromdate: {
+        fromDate: {
             type: Date
         },
-        todate: {
+        toDate: {
             type: Date
         },
         cost: {
-            type: String
+            type: Number
         },
-        email: {
-            type: String,
-            required: true,
-            unique: true,
-            index: true,
-            lowercase: true
+        members: {
+            type: Number
         },
-        tripdetail: {
-            type: Array, //  List of Strings,
+        tripDetails: {
+            type: [DayDetail],
             required: true,
         },
-        image: {
-            type: String,//need to find syntax
-            unique: true,
+        images: {
+            type: [ImagesDetail]
+        },
+        userId: {
+            type: ObjectId,
+            required: true,
+            index: true
         }
     },
     {

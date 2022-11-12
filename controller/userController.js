@@ -1,6 +1,5 @@
 import http from "../common/enums/http";
 import { wrapAsync } from "../common/utils/error/wrapAsync";
-import logger from "../common/utils/logger";
 import userService from "../services/userService";
 
 const create = async (
