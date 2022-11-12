@@ -16,7 +16,12 @@ const create = async (trip) => {
     return result && convertTripDocumentToObject(result);
 };
 
+const getById = async (id) => {
+    const result = await TripModel.findOne({ id });
+    return result && convertTripDocumentToObject(result);
+};
 
-const tripRepository = { create };
+
+const tripRepository = { create, getById };
 
 export default tripRepository;

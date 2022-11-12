@@ -31,8 +31,15 @@ const trips = async (request, response) => {
     response.status(http.StatusCode.CREATED).json(createTrip);
 };
 
+const getById = async (request, response) => {
+    const tripId = request.params.trip_id;
+    const tripDetails = await tripService.getById(tripId);
+    response.status(http.StatusCode.OK).json(tripDetails);
+}
+
 const tripController = wrapAsync({
-    trips
+    trips,
+    getById
 });
 
 

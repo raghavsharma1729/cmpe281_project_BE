@@ -28,15 +28,17 @@ app.use(handleDbConnection);
 app.post("/signup", userController.create);
 app.post("/login", userController.login);
 
-//secured routes
-//trip routes
+// secured routes
+// trip routes
 // Search Trip API getAPI for Trips ( not require authentication)
-// fetch a single trip by user (not require authentication)
-// fetch a single trip by admin (not require authentication)
+
 // edit trip by the user (authenticaiton is required)
 // edit trip by the admin
+
 //create Trip
 app.post("/trips", handleAuthentication, tripController.trips);
+// fetch a single trip (not require authentication)
+app.get("/trips/:trip_id", tripController.getById);
 
 //users routes
 // fetch all  users profile (only admin access)

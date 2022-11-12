@@ -5,7 +5,12 @@ const create = async (trip) => {
     return result;
 };
 
+const getById = async (tripId) => {
+    const result = await tripRepository.getById(tripId);
+    return result;
+};
 
-const tripService = { create };
+
+const tripService = { create, getById };
 
 export default tripService
