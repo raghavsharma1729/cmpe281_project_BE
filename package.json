@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "PROJECT_BE",
+  "name": "pooling-backend",
   "version": "1.0.0",
   "description": "backend to save files on cloud ",
   "main": "app.js",
