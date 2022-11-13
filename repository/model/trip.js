@@ -72,6 +72,9 @@ const TripSchema = new Schema(
         },
         joiners: {
             type: [ObjectId]
+        },
+        chatLink: {
+            type: String,
         }
     },
     {

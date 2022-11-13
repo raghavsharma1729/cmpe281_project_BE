@@ -24,8 +24,11 @@ const create = async (trip) => {
 };
 
 const getById = async (id) => {
-    const result = await TripModel.findOne({ id });
-    return result && convertTripDocumentToObject(result);
+    const aggregationPipeLine = getAggregationPipeLine({ _id: new ObjectId(id) })
+    // const result = await TripModel.findOne({ id });
+    const result = await TripModel.aggregate(aggregationPipeLine);
+    // return result && convertTripDocumentToObject(result);
+    return result.length > 0 ? result[0] : {};
 };
 
 const arrayRegex = (arr) => {
@@ -59,9 +62,11 @@ const fetchFilterOptions = (filter) => {
 
 const filter = async (filters) => {
     const filterOption = fetchFilterOptions(filters);
-    console.log(filterOption);
-    const result = await TripModel.find(filterOption);
-    return result && convertTripsToArray(result);
+    const aggregationPipeLine = getAggregationPipeLine(filterOption)
+    // const result = await TripModel.find(filterOption);
+    const result = await TripModel.aggregate(aggregationPipeLine);
+    // return result && convertTripsToArray(result);
+    return result;
 }
 
 const update = async (trip) => {
@@ -89,15 +94,44 @@ const joinRequest = async (tripId, user) => {
 }
 
 const findTripsofUser = async (userId) => {
-    const trips = await TripModel.find({ userId: new ObjectId(userId) });
-    return trips && convertTripsToArray(trips);
+    const aggregationPipeLine = getAggregationPipeLine({ userId: new ObjectId(userId) });
+    // const trips = await TripModel.find({ userId: new ObjectId(userId) });
+    const trips = await TripModel.aggregate(aggregationPipeLine);
+    // return trips && convertTripsToArray(trips);
+    return trips;
 }
 
 const fetchJoinedTrips = async (userId) => {
-    const trips = await TripModel.find({ joiners: new ObjectId(userId) });
-    return trips && convertTripsToArray(trips);
+    const aggregationPipeLine = getAggregationPipeLine({ joiners: new ObjectId(userId) });
+    // const trips = await TripModel.find({ joiners: new ObjectId(userId) });
+    const trips = await TripModel.aggregate(aggregationPipeLine);
+    // return trips && convertTripsToArray(trips);
+    return trips;
 }
 
+
+const getAggregationPipeLine = (condition) => {
+    return [
+        {
+            '$match':
+                condition
+        }, {
+            '$lookup': {
+                'from': 'users',
+                'localField': 'userId',
+                'foreignField': '_id',
+                'as': 'creator'
+            }
+        }, {
+            '$lookup': {
+                'from': 'users',
+                'localField': 'joiners',
+                'foreignField': '_id',
+                'as': 'joinee'
+            }
+        }
+    ]
+}
 
 const tripRepository = { create, getById, filter, update, joinRequest, findTripsofUser, fetchJoinedTrips };
 

@@ -17,7 +17,8 @@ const create = async (request, response) => {
         images,
         members,
         tripDetails,
-        user
+        user,
+        chatLink
     } = request.body;
     const trip = {
         title,
@@ -29,7 +30,8 @@ const create = async (request, response) => {
         members,
         tripDetails,
         userId: user?.id || new ObjectId(),
-        joiners: []
+        joiners: [],
+        chatLink
     };
     const createTrip = await tripService.create(trip);
     response.status(http.StatusCode.CREATED).json(createTrip);
