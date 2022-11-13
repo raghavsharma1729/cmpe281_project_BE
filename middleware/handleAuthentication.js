@@ -9,9 +9,8 @@ const extractToken = (headers) => {
     return authHeader && authHeader.split(' ')[1];
 };
 
-const handleAuthentication = async (request, response, next) => {
+export const handleAuthentication = async (request, response, next) => {
     const token = extractToken(request.headers);
-    console.log({ token });
     if (isEmpty(token)) {
         next(new AppError(ERROR_CODE.UNAUTHORIZED));
     }
@@ -28,4 +27,23 @@ const handleAuthentication = async (request, response, next) => {
     next();
 }
 
-export default handleAuthentication;
+export const handleAuthenticationForAdmin = async (request, response, next) => {
+    const token = extractToken(request.headers);
+    if (isEmpty(token)) {
+        next(new AppError(ERROR_CODE.UNAUTHORIZED));
+    }
+    try {
+        const payload = await jwt.decodeJWT(token);
+        if (isEmpty(payload.data)) {
+            next(new AppError(ERROR_CODE.UNAUTHORIZED));
+        }
+        if (!payload.data.admin) {
+            next(new AppError(ERROR_CODE.UNAUTHORIZED));
+        }
+        request.body.user = payload.data;
+    }
+    catch (e) {
+        next(new AppError(ERROR_CODE.UNAUTHORIZED));
+    }
+    next();
+}

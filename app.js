@@ -10,7 +10,7 @@ import {
     handleDbConnection,
     handleRoutes
 } from './middleware';
-import handleAuthentication from './middleware/handleAuthentication.js';
+import { handleAuthentication, handleAuthenticationForAdmin } from './middleware/handleAuthentication.js';
 
 
 dotenv.config()
@@ -44,8 +44,8 @@ app.get("/trips/:trip_id", tripController.getById);
 //users routes
 // fetch all  users profile (only admin access)
 // fetch a single user profile (only admin access)
-// authenticatio is due here
-app.get("/users/:user_id", userController.getById);
+// TODO: authenticatio is due here
+app.get("/users/:user_id", handleAuthenticationForAdmin, userController.getById);
 
 // edit a user profile (admin and user it self) This api to verify the user identification
 

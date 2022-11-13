@@ -41,6 +41,10 @@ const UserSchema = new Schema(
         contactNo: {
             type: String,
             unique: true,
+        },
+        admin: {
+            type: Boolean,
+            default: false
         }
     },
     {
