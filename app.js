@@ -31,6 +31,7 @@ app.post("/login", userController.login);
 // secured routes
 // trip routes
 // Search Trip API getAPI for Trips ( not require authentication)
+app.get("/trips", tripController.findTrips);
 
 // edit trip by the user (authenticaiton is required)
 // edit trip by the admin
@@ -43,7 +44,9 @@ app.get("/trips/:trip_id", tripController.getById);
 //users routes
 // fetch all  users profile (only admin access)
 // fetch a single user profile (only admin access)
+// authenticatio is due here
 app.get("/users/:user_id", userController.getById);
+
 // edit a user profile (admin and user it self) This api to verify the user identification
 
 // verify user email 

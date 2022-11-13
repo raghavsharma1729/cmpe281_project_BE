@@ -10,7 +10,12 @@ const getById = async (tripId) => {
     return result;
 };
 
+const filter = async (filters) => {
+    const result = await tripRepository.filter(filters);
+    return result;
+};
 
-const tripService = { create, getById };
+
+const tripService = { create, getById, filter };
 
 export default tripService

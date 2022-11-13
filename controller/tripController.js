@@ -2,6 +2,8 @@ import http from "../common/enums/http";
 import { wrapAsync } from "../common/utils/error/wrapAsync";
 import tripService from "../services/tripService";
 import { ObjectId } from 'mongodb';
+import pkg from 'lodash';
+const { isEmpty } = pkg;
 
 
 const trips = async (request, response) => {
@@ -37,9 +39,22 @@ const getById = async (request, response) => {
     response.status(http.StatusCode.OK).json(tripDetails);
 }
 
+const findTrips = async (request, response) => {
+    const { places, startDate, endDate } = request.query;
+    console.log({ places, startDate, endDate });
+    const filters = {
+        places: Array.isArray(places) ? places : [places],
+        startDate,
+        endDate
+    }
+    const trips = await tripService.filter(filters);
+    response.status(http.StatusCode.OK).json(trips);
+}
+
 const tripController = wrapAsync({
     trips,
-    getById
+    getById,
+    findTrips
 });
 
 
