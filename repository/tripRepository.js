@@ -79,7 +79,16 @@ const update = async (trip) => {
     return result && convertTripDocumentToObject(result);
 }
 
+const joinRequest = async (tripId, user) => {
+    await TripModel.updateOne(
+        {
+            _id: new ObjectId(tripId)
+        },
+        { $addToSet: { joiners: new ObjectId(user.id) } }
+    );
+}
 
-const tripRepository = { create, getById, filter, update };
+
+const tripRepository = { create, getById, filter, update, joinRequest };
 
 export default tripRepository;

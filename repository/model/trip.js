@@ -69,6 +69,9 @@ const TripSchema = new Schema(
             type: ObjectId,
             required: true,
             index: true
+        },
+        joiners: {
+            type: [ObjectId]
         }
     },
     {

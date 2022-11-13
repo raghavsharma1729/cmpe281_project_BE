@@ -28,6 +28,11 @@ const update = async (trip, user) => {
     }
 };
 
-const tripService = { create, getById, filter, update };
+const joinRequest = async (tripId, user) => {
+    const trip = await tripRepository.joinRequest(tripId, user);
+    return trip;
+};
+
+const tripService = { create, getById, filter, update, joinRequest };
 
 export default tripService

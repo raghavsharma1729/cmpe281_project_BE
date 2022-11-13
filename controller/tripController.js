@@ -3,10 +3,11 @@ import { wrapAsync } from "../common/utils/error/wrapAsync";
 import tripService from "../services/tripService";
 import { ObjectId } from 'mongodb';
 import pkg from 'lodash';
+import { request } from "express";
 const { isEmpty } = pkg;
 
 
-const trips = async (request, response) => {
+const create = async (request, response) => {
     const {
         title,
         destinations,
@@ -27,7 +28,8 @@ const trips = async (request, response) => {
         images,
         members,
         tripDetails,
-        userId: user?.id || new ObjectId()
+        userId: user?.id || new ObjectId(),
+        joiners: []
     };
     const createTrip = await tripService.create(trip);
     response.status(http.StatusCode.CREATED).json(createTrip);
@@ -80,12 +82,19 @@ const update = async (request, response) => {
     response.status(http.StatusCode.CREATED).json(updatedTrip);
 };
 
+const joinRequest = async (request, response) => {
+    const tripId = request.params.trip_id;
+    const user = request.body.user;
+    const updatedTrip = await tripService.joinRequest(tripId, user);
+    response.status(http.StatusCode.CREATED).json(updatedTrip);
+}
 
 const tripController = wrapAsync({
-    trips,
+    create,
     getById,
     findTrips,
-    update
+    update,
+    joinRequest
 });
 
 

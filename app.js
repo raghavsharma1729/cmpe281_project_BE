@@ -38,9 +38,12 @@ app.get("/trips", tripController.findTrips);
 app.put("/trips/:trip_id", handleAuthentication, tripController.update)
 
 //create Trip
-app.post("/trips", handleAuthentication, tripController.trips);
+app.post("/trips", handleAuthentication, tripController.create);
 // fetch a single trip (not require authentication)
 app.get("/trips/:trip_id", tripController.getById);
+
+// trip joining request
+app.post("/trips/:trip_id/request", handleAuthentication, tripController.joinRequest);
 
 //users routes
 // fetch all users profile (only admin access)
