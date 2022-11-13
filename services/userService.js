@@ -18,7 +18,7 @@ const login = async (email, password) => {
         throw new AppError(ERROR_CODE.UNAUTHORIZED);
     }
     const token = jwt.signJWT(user);
-    return token;
+    return { token, user };
 }
 
 const fetchProfile = async (user) => {

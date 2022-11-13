@@ -24,8 +24,8 @@ const create = async (
 
 const login = async (request, response) => {
     const { email, password } = request.body;
-    const token = await userService.login(email, password);
-    response.status(http.StatusCode.OK).json(token);
+    const result = await userService.login(email, password);
+    response.status(http.StatusCode.OK).json(result);
 };
 
 const fetchProfile = async (request, response) => {
