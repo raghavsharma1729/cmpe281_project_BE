@@ -33,11 +33,17 @@ const fetchProfile = async (request, response) => {
     response.status(http.StatusCode.OK).json(userProfile);
 };
 
+const getById = async (request, response) => {
+    const userId = request.params.user_id;
+    const userDetails = await userService.getById(userId);
+    response.status(http.StatusCode.OK).json(userDetails);
+}
 
 const userController = wrapAsync({
     create,
     login,
-    fetchProfile
+    fetchProfile,
+    getById
 });
 
 export default userController;

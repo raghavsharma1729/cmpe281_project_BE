@@ -25,7 +25,11 @@ const fetchProfile = async (user) => {
     return result;
 };
 
+const getById = async (userId) => {
+    const result = await userRepository.findUserById(userId);
+    return result;
+};
 
-const userService = { create, login, fetchProfile };
+const userService = { create, login, fetchProfile, getById };
 
 export default userService

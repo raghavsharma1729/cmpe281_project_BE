@@ -22,9 +22,10 @@ const findUserByEmailAndPassword = async (email, password) => {
 };
 
 const findUserById = async (id) => {
-    const result = await UserModel.findOne({ id });
+    const result = await UserModel.findById(id);
     return result && convertUserDocumentToObject(result);
 };
+
 
 const userRepository = { create, findUserByEmailAndPassword, findUserById };
 
