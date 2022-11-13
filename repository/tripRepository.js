@@ -88,7 +88,11 @@ const joinRequest = async (tripId, user) => {
     );
 }
 
+const findTripsofUser = async (userId) => {
+    const trips = await TripModel.find({ userId: new ObjectId(userId) });
+    return trips && convertTripsToArray(trips);
+}
 
-const tripRepository = { create, getById, filter, update, joinRequest };
+const tripRepository = { create, getById, filter, update, joinRequest, findTripsofUser };
 
 export default tripRepository;

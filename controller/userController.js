@@ -1,3 +1,4 @@
+import { request, response } from "express";
 import http from "../common/enums/http";
 import { wrapAsync } from "../common/utils/error/wrapAsync";
 import userService from "../services/userService";
@@ -39,11 +40,19 @@ const getById = async (request, response) => {
     response.status(http.StatusCode.OK).json(userDetails);
 }
 
+const fetchUserTrips = async (request, response) => {
+    const user = request.body.user;
+    const trips = await userService.fetchTrips(user);
+    response.status(http.StatusCode.OK).json(trips);
+
+}
+
 const userController = wrapAsync({
     create,
     login,
     fetchProfile,
-    getById
+    getById,
+    fetchUserTrips
 });
 
 export default userController;

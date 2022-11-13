@@ -33,6 +33,11 @@ const joinRequest = async (tripId, user) => {
     return trip;
 };
 
-const tripService = { create, getById, filter, update, joinRequest };
+const findTripsofUser = async (user) => {
+    const trips = await tripRepository.findTripsofUser(user.id);
+    return trips;
+}
+
+const tripService = { create, getById, filter, update, joinRequest, findTripsofUser };
 
 export default tripService

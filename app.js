@@ -50,6 +50,9 @@ app.post("/trips/:trip_id/request", handleAuthentication, tripController.joinReq
 // fetch a single user profile (only admin access)
 app.get("/users/:user_id", handleAuthenticationForAdmin, userController.getById);
 
+// fetch trips created by user
+app.get("/profile/trips", handleAuthentication, userController.fetchUserTrips);
+
 // edit a user profile (admin and user it self) This api to verify the user identification
 
 // verify user email 

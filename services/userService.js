@@ -3,6 +3,7 @@ import pkg from 'lodash';
 import { AppError } from "../common/utils/error/AppError";
 import { ERROR_CODE } from "../common/enums/errorCode";
 import jwt from "../common/utils/jwt";
+import tripService from "./tripService";
 
 const { isEmpty } = pkg;
 
@@ -25,11 +26,16 @@ const fetchProfile = async (user) => {
     return result;
 };
 
+const fetchTrips = async (user) => {
+    const trips = await tripService.findTripsofUser(user);
+    return trips;
+}
+
 const getById = async (userId) => {
     const result = await userRepository.findUserById(userId);
     return result;
 };
 
-const userService = { create, login, fetchProfile, getById };
+const userService = { create, login, fetchProfile, getById, fetchTrips };
 
 export default userService
