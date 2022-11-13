@@ -44,7 +44,12 @@ const fetchUserTrips = async (request, response) => {
     const user = request.body.user;
     const trips = await userService.fetchTrips(user);
     response.status(http.StatusCode.OK).json(trips);
+}
 
+const fetchJoinedTrips = async (request, response) => {
+    const user = request.body.user;
+    const trips = await userService.fetchJoinedTrips(user);
+    response.status(http.StatusCode.OK).json(trips);
 }
 
 const userController = wrapAsync({
@@ -52,7 +57,8 @@ const userController = wrapAsync({
     login,
     fetchProfile,
     getById,
-    fetchUserTrips
+    fetchUserTrips,
+    fetchJoinedTrips
 });
 
 export default userController;

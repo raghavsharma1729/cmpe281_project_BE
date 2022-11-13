@@ -53,6 +53,9 @@ app.get("/users/:user_id", handleAuthenticationForAdmin, userController.getById)
 // fetch trips created by user
 app.get("/profile/trips", handleAuthentication, userController.fetchUserTrips);
 
+//fetch trips user has joined or or part of 
+app.get("/profile/trips/request", handleAuthentication, userController.fetchJoinedTrips);
+
 // edit a user profile (admin and user it self) This api to verify the user identification
 
 // verify user email 

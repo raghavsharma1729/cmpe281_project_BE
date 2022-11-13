@@ -31,11 +31,16 @@ const fetchTrips = async (user) => {
     return trips;
 }
 
+const fetchJoinedTrips = async (user) => {
+    const trips = await tripService.fetchJoinedTrips(user);
+    return trips;
+}
+
 const getById = async (userId) => {
     const result = await userRepository.findUserById(userId);
     return result;
 };
 
-const userService = { create, login, fetchProfile, getById, fetchTrips };
+const userService = { create, login, fetchProfile, getById, fetchTrips, fetchJoinedTrips };
 
 export default userService
