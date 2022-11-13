@@ -1,7 +1,9 @@
 import pkg from "lodash";
 import { TripModel } from "./model/trip";
+import { ObjectId } from 'mongodb';
 
-const { isEmpty } = pkg;
+
+const { isEmpty, isUndefined, omitBy } = pkg;
 
 const convertTripDocumentToObject = (document) =>
     document.toObject({
@@ -62,7 +64,22 @@ const filter = async (filters) => {
     return result && convertTripsToArray(result);
 }
 
+const update = async (trip) => {
+    const result = await TripModel.findOneAndUpdate(
+        {
+            _id: new ObjectId(trip.id)
+        },
+        { $set: omitBy(trip, isUndefined) },
+        {
+            new: true,
+            runValidators: true,
+        }
+    );
 
-const tripRepository = { create, getById, filter };
+    return result && convertTripDocumentToObject(result);
+}
+
+
+const tripRepository = { create, getById, filter, update };
 
 export default tripRepository;

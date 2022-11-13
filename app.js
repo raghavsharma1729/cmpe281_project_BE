@@ -35,6 +35,7 @@ app.get("/trips", tripController.findTrips);
 
 // edit trip by the user (authenticaiton is required)
 // edit trip by the admin
+app.put("/trips/:trip_id", handleAuthentication, tripController.update)
 
 //create Trip
 app.post("/trips", handleAuthentication, tripController.trips);
@@ -42,9 +43,8 @@ app.post("/trips", handleAuthentication, tripController.trips);
 app.get("/trips/:trip_id", tripController.getById);
 
 //users routes
-// fetch all  users profile (only admin access)
+// fetch all users profile (only admin access)
 // fetch a single user profile (only admin access)
-// TODO: authenticatio is due here
 app.get("/users/:user_id", handleAuthenticationForAdmin, userController.getById);
 
 // edit a user profile (admin and user it self) This api to verify the user identification

@@ -1,3 +1,5 @@
+import { ERROR_CODE } from "../common/enums/errorCode";
+import { AppError } from "../common/utils/error/AppError";
 import tripRepository from "../repository/tripRepository";
 
 const create = async (trip) => {
@@ -15,7 +17,17 @@ const filter = async (filters) => {
     return result;
 };
 
+const update = async (trip, user) => {
+    const tripDetails = await tripRepository.getById(trip.id);
+    if (user.admin || user.id == tripDetails.userId) {
+        const result = await tripRepository.update(trip);
+        return result;
+    }
+    else {
+        throw new AppError(ERROR_CODE.FORBIDDEN);
+    }
+};
 
-const tripService = { create, getById, filter };
+const tripService = { create, getById, filter, update };
 
 export default tripService
