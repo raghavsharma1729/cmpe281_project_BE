@@ -28,10 +28,6 @@ const UserSchema = new Schema(
             index: true,
             lowercase: true
         },
-        lastName: {
-            type: String,
-            required: true,
-        },
         dateOfBirth: {
             type: Date
         },
