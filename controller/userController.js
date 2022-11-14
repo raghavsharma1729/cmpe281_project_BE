@@ -1,6 +1,6 @@
+import { request, response } from "express";
 import http from "../common/enums/http";
 import { wrapAsync } from "../common/utils/error/wrapAsync";
-import logger from "../common/utils/logger";
 import userService from "../services/userService";
 
 const create = async (
@@ -24,14 +24,41 @@ const create = async (
 
 const login = async (request, response) => {
     const { email, password } = request.body;
-    const token = await userService.login(email, password);
-    response.status(http.StatusCode.OK).json(token);
+    const result = await userService.login(email, password);
+    response.status(http.StatusCode.OK).json(result);
 };
 
+const fetchProfile = async (request, response) => {
+    const user = request.body.user;
+    const userProfile = await userService.fetchProfile(user)
+    response.status(http.StatusCode.OK).json(userProfile);
+};
+
+const getById = async (request, response) => {
+    const userId = request.params.user_id;
+    const userDetails = await userService.getById(userId);
+    response.status(http.StatusCode.OK).json(userDetails);
+}
+
+const fetchUserTrips = async (request, response) => {
+    const user = request.body.user;
+    const trips = await userService.fetchTrips(user);
+    response.status(http.StatusCode.OK).json(trips);
+}
+
+const fetchJoinedTrips = async (request, response) => {
+    const user = request.body.user;
+    const trips = await userService.fetchJoinedTrips(user);
+    response.status(http.StatusCode.OK).json(trips);
+}
 
 const userController = wrapAsync({
     create,
-    login
+    login,
+    fetchProfile,
+    getById,
+    fetchUserTrips,
+    fetchJoinedTrips
 });
 
 export default userController;

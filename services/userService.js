@@ -3,6 +3,7 @@ import pkg from 'lodash';
 import { AppError } from "../common/utils/error/AppError";
 import { ERROR_CODE } from "../common/enums/errorCode";
 import jwt from "../common/utils/jwt";
+import tripService from "./tripService";
 
 const { isEmpty } = pkg;
 
@@ -17,9 +18,29 @@ const login = async (email, password) => {
         throw new AppError(ERROR_CODE.UNAUTHORIZED);
     }
     const token = jwt.signJWT(user);
-    return token;
+    return { token, user };
 }
 
-const userService = { create, login };
+const fetchProfile = async (user) => {
+    const result = await userRepository.findUserById(user.id);
+    return result;
+};
+
+const fetchTrips = async (user) => {
+    const trips = await tripService.findTripsofUser(user);
+    return trips;
+}
+
+const fetchJoinedTrips = async (user) => {
+    const trips = await tripService.fetchJoinedTrips(user);
+    return trips;
+}
+
+const getById = async (userId) => {
+    const result = await userRepository.findUserById(userId);
+    return result;
+};
+
+const userService = { create, login, fetchProfile, getById, fetchTrips, fetchJoinedTrips };
 
 export default userService
