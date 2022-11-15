@@ -1,4 +1,4 @@
-import { connectMongo } from '../common/db/mongoConnection';
+import { connectMongo } from '../common/db/mongoConnection.js';
 export const handleDbConnection = async (
     request,
     response,

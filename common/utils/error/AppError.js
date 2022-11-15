@@ -1,4 +1,4 @@
-import { ErrorList } from '../../../error';
+import { ErrorList } from '../../../error.js';
 
 export class AppError extends Error {
   errorCode;

@@ -1,9 +1,9 @@
-import userRepository from "../repository/userRepository";
+import userRepository from "../repository/userRepository.js";
 import pkg from 'lodash';
-import { AppError } from "../common/utils/error/AppError";
-import { ERROR_CODE } from "../common/enums/errorCode";
-import jwt from "../common/utils/jwt";
-import tripService from "./tripService";
+import { AppError } from "../common/utils/error/AppError.js";
+import { ERROR_CODE } from "../common/enums/errorCode.js";
+import jwt from "../common/utils/jwt/index.js";
+import tripService from "./tripService.js";
 
 const { isEmpty } = pkg;
 

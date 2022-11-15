@@ -1,8 +1,8 @@
-import { AppError } from '../common/utils/error/AppError';
-import logger from '../common/utils/logger';
-import http from '../common/enums/http';
-import { ERROR_CODE } from '../common/enums/errorCode';
-import { ErrorList } from '../error';
+import { AppError } from '../common/utils/error/AppError.js';
+import logger from '../common/utils/logger/index.js';
+import http from '../common/enums/http.js';
+import { ERROR_CODE } from '../common/enums/errorCode.js';
+import { ErrorList } from '../error.js';
 
 export const handleErrors = (
   error,

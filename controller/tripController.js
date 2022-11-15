@@ -1,6 +1,6 @@
-import http from "../common/enums/http";
-import { wrapAsync } from "../common/utils/error/wrapAsync";
-import tripService from "../services/tripService";
+import http from "../common/enums/http.js";
+import { wrapAsync } from "../common/utils/error/wrapAsync.js";
+import tripService from "../services/tripService.js";
 import { ObjectId } from 'mongodb';
 import pkg from 'lodash';
 import { request } from "express";

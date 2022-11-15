@@ -1,6 +1,6 @@
-import { ERROR_CODE } from "../common/enums/errorCode";
-import { AppError } from "../common/utils/error/AppError";
-import tripRepository from "../repository/tripRepository";
+import { ERROR_CODE } from "../common/enums/errorCode.js";
+import { AppError } from "../common/utils/error/AppError.js";
+import tripRepository from "../repository/tripRepository.js";
 
 const create = async (trip) => {
     const result = await tripRepository.create(trip);

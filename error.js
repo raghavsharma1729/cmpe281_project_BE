@@ -1,5 +1,5 @@
-import Http from './common/enums/http';
-import { ERROR_CODE } from './common/enums/errorCode';
+import Http from './common/enums/http.js';
+import { ERROR_CODE } from './common/enums/errorCode.js';
 
 const ErrorList = {
   [ERROR_CODE.INVALID_REQUEST]: {

@@ -9,7 +9,7 @@ import {
     handleErrors,
     handleDbConnection,
     handleRoutes
-} from './middleware';
+} from './middleware/index.js';
 import { handleAuthentication, handleAuthenticationForAdmin } from './middleware/handleAuthentication.js';
 
 

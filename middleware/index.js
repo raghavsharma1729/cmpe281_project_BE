@@ -1,4 +1,4 @@
-export { handleLogs } from './handleLogs';
-export { handleErrors } from './handleErrors';
-export { handleRoutes } from './handleRoutes';
-export { handleDbConnection } from './handleDbConnection';
+export { handleLogs } from './handleLogs.js';
+export { handleErrors } from './handleErrors.js';
+export { handleRoutes } from './handleRoutes.js';
+export { handleDbConnection } from './handleDbConnection.js';
