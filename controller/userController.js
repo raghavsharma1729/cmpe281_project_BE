@@ -1,4 +1,3 @@
-import { request, response } from "express";
 import http from "../common/enums/http";
 import { wrapAsync } from "../common/utils/error/wrapAsync";
 import userService from "../services/userService";

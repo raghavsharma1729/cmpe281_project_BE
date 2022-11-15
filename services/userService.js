@@ -22,7 +22,7 @@ const login = async (email, password) => {
 }
 
 const fetchProfile = async (user) => {
-    const result = await userRepository.findUserById(user.id);
+    const result = await userService.getById(user.id);
     return result;
 };
 
