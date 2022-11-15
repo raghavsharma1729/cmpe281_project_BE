@@ -37,8 +37,10 @@ const fetchJoinedTrips = async (user) => {
 }
 
 const getById = async (userId) => {
-    const result = await userRepository.findUserById(userId);
-    return result;
+    const user = await userRepository.findUserById(userId);
+    const tripsCreated = await fetchTrips(user);
+    const tripsJoined = await fetchJoinedTrips(user);
+    return { ...user, tripsCreated: tripsCreated.length, tripsJoined: tripsJoined.length };
 };
 
 const userService = { create, login, fetchProfile, getById, fetchTrips, fetchJoinedTrips };
