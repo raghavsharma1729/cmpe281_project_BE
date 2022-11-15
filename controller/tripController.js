@@ -10,6 +10,7 @@ const { isEmpty } = pkg;
 const create = async (request, response) => {
     const {
         title,
+        description,
         destinations,
         fromDate,
         toDate,
@@ -23,6 +24,7 @@ const create = async (request, response) => {
     const trip = {
         title,
         destinations,
+        description,
         fromDate: new Date(fromDate),
         toDate: new Date(toDate),
         cost,
@@ -58,6 +60,7 @@ const findTrips = async (request, response) => {
 const update = async (request, response) => {
     const {
         title,
+        description,
         destinations,
         fromDate,
         toDate,
@@ -73,6 +76,7 @@ const update = async (request, response) => {
         id: tripId,
         title,
         destinations,
+        description,
         fromDate: isEmpty(fromDate) ? undefined : new Date(fromDate),
         toDate: isEmpty(toDate) ? undefined : new Date(toDate),
         cost,
