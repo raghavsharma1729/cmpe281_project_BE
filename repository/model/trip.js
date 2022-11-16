@@ -42,6 +42,9 @@ const TripSchema = new Schema(
             type: String,
             required: true,
         },
+        description: {
+            type: String,
+        },
         destinations: {
             type: [String],
             required: true

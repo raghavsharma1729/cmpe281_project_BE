@@ -1,6 +1,6 @@
-import http from "../common/enums/http";
-import { wrapAsync } from "../common/utils/error/wrapAsync";
-import tripService from "../services/tripService";
+import http from "../common/enums/http.js";
+import { wrapAsync } from "../common/utils/error/wrapAsync.js";
+import tripService from "../services/tripService.js";
 import { ObjectId } from 'mongodb';
 import pkg from 'lodash';
 import { request } from "express";
@@ -10,6 +10,7 @@ const { isEmpty } = pkg;
 const create = async (request, response) => {
     const {
         title,
+        description,
         destinations,
         fromDate,
         toDate,
@@ -23,6 +24,7 @@ const create = async (request, response) => {
     const trip = {
         title,
         destinations,
+        description,
         fromDate: new Date(fromDate),
         toDate: new Date(toDate),
         cost,
@@ -58,6 +60,7 @@ const findTrips = async (request, response) => {
 const update = async (request, response) => {
     const {
         title,
+        description,
         destinations,
         fromDate,
         toDate,
@@ -73,6 +76,7 @@ const update = async (request, response) => {
         id: tripId,
         title,
         destinations,
+        description,
         fromDate: isEmpty(fromDate) ? undefined : new Date(fromDate),
         toDate: isEmpty(toDate) ? undefined : new Date(toDate),
         cost,

@@ -1,4 +1,4 @@
-import logger from '../common/utils/logger';
+import logger from '../common/utils/logger/index.js';
 
 export const handleLogs = (
     request,

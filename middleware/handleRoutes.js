@@ -1,5 +1,5 @@
-import { AppError } from '../common/utils/error/AppError';
-import { ERROR_CODE } from '../common/enums/errorCode';
+import { AppError } from '../common/utils/error/AppError.js';
+import { ERROR_CODE } from '../common/enums/errorCode.js';
 
 export const handleRoutes = (
   request,

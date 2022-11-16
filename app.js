@@ -9,7 +9,7 @@ import {
     handleErrors,
     handleDbConnection,
     handleRoutes
-} from './middleware';
+} from './middleware/index.js';
 import { handleAuthentication, handleAuthenticationForAdmin } from './middleware/handleAuthentication.js';
 
 
@@ -48,7 +48,7 @@ app.post("/trips/:trip_id/request", handleAuthentication, tripController.joinReq
 //users routes
 // fetch all users profile (only admin access)
 // fetch a single user profile (only admin access)
-app.get("/users/:user_id", handleAuthenticationForAdmin, userController.getById);
+app.get("/users/:user_id", handleAuthentication, userController.getById);
 
 // fetch trips created by user
 app.get("/profile/trips", handleAuthentication, userController.fetchUserTrips);

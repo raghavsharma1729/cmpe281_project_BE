@@ -1,5 +1,5 @@
 import { createLogger } from 'winston';
-import loggerConfig from './config';
+import loggerConfig from './config.js';
 
 const logger = createLogger(loggerConfig);
 

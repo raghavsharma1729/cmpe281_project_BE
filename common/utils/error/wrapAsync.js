@@ -1,4 +1,4 @@
-import transform from 'lodash/transform';
+import transform from 'lodash/transform.js';
 
 const getWrapper = () => {
   return (module) => {

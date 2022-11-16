@@ -1,6 +1,6 @@
 import pkg from 'mongoose';
 const { connect, connection } = pkg;
-import logger from '../utils/logger';
+import logger from '../utils/logger/index.js';
 
 
 

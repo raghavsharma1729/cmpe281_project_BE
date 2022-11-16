@@ -1,7 +1,6 @@
-import { request, response } from "express";
-import http from "../common/enums/http";
-import { wrapAsync } from "../common/utils/error/wrapAsync";
-import userService from "../services/userService";
+import http from "../common/enums/http.js";
+import { wrapAsync } from "../common/utils/error/wrapAsync.js";
+import userService from "../services/userService.js";
 
 const create = async (
     request,

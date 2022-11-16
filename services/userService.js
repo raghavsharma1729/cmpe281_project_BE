@@ -1,9 +1,9 @@
-import userRepository from "../repository/userRepository";
+import userRepository from "../repository/userRepository.js";
 import pkg from 'lodash';
-import { AppError } from "../common/utils/error/AppError";
-import { ERROR_CODE } from "../common/enums/errorCode";
-import jwt from "../common/utils/jwt";
-import tripService from "./tripService";
+import { AppError } from "../common/utils/error/AppError.js";
+import { ERROR_CODE } from "../common/enums/errorCode.js";
+import jwt from "../common/utils/jwt/index.js";
+import tripService from "./tripService.js";
 
 const { isEmpty } = pkg;
 
@@ -22,7 +22,7 @@ const login = async (email, password) => {
 }
 
 const fetchProfile = async (user) => {
-    const result = await userRepository.findUserById(user.id);
+    const result = await userService.getById(user.id);
     return result;
 };
 
@@ -37,8 +37,10 @@ const fetchJoinedTrips = async (user) => {
 }
 
 const getById = async (userId) => {
-    const result = await userRepository.findUserById(userId);
-    return result;
+    const user = await userRepository.findUserById(userId);
+    const tripsCreated = await fetchTrips(user);
+    const tripsJoined = await fetchJoinedTrips(user);
+    return { ...user, tripsCreated: tripsCreated.length, tripsJoined: tripsJoined.length };
 };
 
 const userService = { create, login, fetchProfile, getById, fetchTrips, fetchJoinedTrips };

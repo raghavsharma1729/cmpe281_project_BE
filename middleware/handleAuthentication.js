@@ -1,7 +1,7 @@
 import pkg from 'lodash';
-import { ERROR_CODE } from '../common/enums/errorCode';
-import { AppError } from "../common/utils/error/AppError";
-import jwt from "../common/utils/jwt";
+import { ERROR_CODE } from '../common/enums/errorCode.js';
+import { AppError } from "../common/utils/error/AppError.js";
+import jwt from "../common/utils/jwt/index.js";
 const { isEmpty, get } = pkg;
 
 const extractToken = (headers) => {

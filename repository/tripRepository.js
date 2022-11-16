@@ -1,5 +1,5 @@
 import pkg from "lodash";
-import { TripModel } from "./model/trip";
+import { TripModel } from "./model/trip.js";
 import { ObjectId } from 'mongodb';
 
 
