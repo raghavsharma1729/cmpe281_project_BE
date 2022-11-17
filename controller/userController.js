@@ -14,9 +14,10 @@ const create = async (
         contactNo,
         email,
         password,
-        identification
+        identification,
+        profilePicture
     } = request.body;
-    const user = { firstName, lastName, gender, dateOfBirth: new Date(dateOfBirth), contactNo, email, password, identification };
+    const user = { firstName, lastName, gender, dateOfBirth: new Date(dateOfBirth), contactNo, email, password, identification, profilePicture };
     const createdUser = await userService.create(user);
     response.status(http.StatusCode.CREATED).json(createdUser);
 };
@@ -39,6 +40,12 @@ const getById = async (request, response) => {
     response.status(http.StatusCode.OK).json(userDetails);
 }
 
+const verify = async (request, response) => {
+    const token = request.params.token;
+    const result = await userService.verify(token);
+    response.status(http.StatusCode.OK).json(result);
+}
+
 const fetchUserTrips = async (request, response) => {
     const user = request.body.user;
     const trips = await userService.fetchTrips(user);
@@ -57,7 +64,8 @@ const userController = wrapAsync({
     fetchProfile,
     getById,
     fetchUserTrips,
-    fetchJoinedTrips
+    fetchJoinedTrips,
+    verify
 });
 
 export default userController;

@@ -49,12 +49,13 @@ app.post("/trips/:trip_id/request", handleAuthentication, tripController.joinReq
 // fetch all users profile (only admin access)
 // fetch a single user profile (only admin access)
 app.get("/users/:user_id", handleAuthentication, userController.getById);
+app.get("/users/verify/:token", userController.verify);
 
 // fetch trips created by user
 app.get("/profile/trips", handleAuthentication, userController.fetchUserTrips);
 
 //fetch trips user has joined or or part of 
-app.get("/profile/trips/request", handleAuthentication, userController.fetchJoinedTrips);
+app.get("/profile/trips/joined", handleAuthentication, userController.fetchJoinedTrips);
 
 // edit a user profile (admin and user it self) This api to verify the user identification
 

@@ -85,7 +85,7 @@ const update = async (trip) => {
 }
 
 const joinRequest = async (tripId, user) => {
-    await TripModel.updateOne(
+    return await TripModel.updateOne(
         {
             _id: new ObjectId(tripId)
         },

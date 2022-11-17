@@ -4,12 +4,22 @@ import { AppError } from "../common/utils/error/AppError.js";
 import { ERROR_CODE } from "../common/enums/errorCode.js";
 import jwt from "../common/utils/jwt/index.js";
 import tripService from "./tripService.js";
+import { sendEmail } from "../repository/awsRepository.js";
+import userVerificationRepository from "../repository/userVerificationRepository.js";
+import { v4 as uuidv4 } from 'uuid';
+
 
 const { isEmpty } = pkg;
 
 const create = async (user) => {
-    const result = await userRepository.create(user);
-    return result;
+    const profilePictureLink = `${process.env.CLOUD_FRONT_URL}/${user.profilePicture}`;
+    const createdUser = await userRepository.create({ ...user, profilePicture: profilePictureLink });
+    const userVerification = { token: uuidv4(), userId: createdUser.id };
+    const createdUserVerification = await userVerificationRepository.create(userVerification);
+    const url = `${process.env.FRONT_BASE_URL}/user/${createdUserVerification.token}`;
+    // Enable to send email notification
+    sendEmail(createdUser, url);
+    return createdUser;
 };
 
 const login = async (email, password) => {
@@ -24,6 +34,17 @@ const login = async (email, password) => {
 const fetchProfile = async (user) => {
     const result = await userService.getById(user.id);
     return result;
+};
+
+const verify = async (token) => {
+    const userVerification = await userVerificationRepository.findByToken(token);
+    console.log('service userVerification', userVerification)
+    if (isEmpty(userVerification)) {
+        throw new AppError(ERROR_CODE.INVALID_REQUEST)
+    }
+    const user = await userRepository.updateVerification(userVerification.userId);
+    await userVerificationRepository.findAndDelete(userVerification);
+    return user;
 };
 
 const fetchTrips = async (user) => {
@@ -43,6 +64,6 @@ const getById = async (userId) => {
     return { ...user, tripsCreated: tripsCreated.length, tripsJoined: tripsJoined.length };
 };
 
-const userService = { create, login, fetchProfile, getById, fetchTrips, fetchJoinedTrips };
+const userService = { create, login, fetchProfile, getById, fetchTrips, fetchJoinedTrips, verify };
 
 export default userService
