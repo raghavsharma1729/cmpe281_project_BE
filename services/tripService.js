@@ -29,7 +29,8 @@ const update = async (trip, user) => {
 };
 
 const joinRequest = async (tripId, user) => {
-    const trip = await tripRepository.joinRequest(tripId, user);
+    await tripRepository.joinRequest(tripId, user);
+    const trip = await tripRepository.getById(tripId)
     return trip;
 };
 

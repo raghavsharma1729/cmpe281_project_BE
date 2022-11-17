@@ -41,6 +41,13 @@ const UserSchema = new Schema(
         admin: {
             type: Boolean,
             default: false
+        },
+        emailVerified: {
+            type: Boolean,
+            default: false
+        },
+        profilePicture: {
+            type: String
         }
     },
     {

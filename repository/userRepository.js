@@ -1,4 +1,5 @@
 import { UserModel } from "./model/user.js";
+import { ObjectId } from 'mongodb';
 
 
 const convertUserDocumentToObject = (document) =>
@@ -16,6 +17,18 @@ const create = async (user) => {
     return result && convertUserDocumentToObject(result);
 };
 
+const updateVerification = async (userId) => {
+    const result = await UserModel.findOneAndUpdate({
+        _id: new ObjectId(userId)
+    },
+        { $set: { emailVerified: true } },
+        {
+            new: true,
+            runValidators: true,
+        });
+    return result && convertUserDocumentToObject(result);
+};
+
 const findUserByEmailAndPassword = async (email, password) => {
     const result = await UserModel.findOne({ email, password });
     return result && convertUserDocumentToObject(result);
@@ -27,6 +40,6 @@ const findUserById = async (id) => {
 };
 
 
-const userRepository = { create, findUserByEmailAndPassword, findUserById };
+const userRepository = { create, findUserByEmailAndPassword, findUserById, updateVerification };
 
 export default userRepository;
